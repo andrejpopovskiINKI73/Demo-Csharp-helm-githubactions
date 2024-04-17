@@ -23,6 +23,6 @@ WORKDIR /app
 
 EXPOSE 5555
 
-COPY ./src/publish/ ./
+COPY ./publish/ ./
 
 ENTRYPOINT ["dotnet", "TodoApi.dll", "--urls", "http://0.0.0.0:5555"]
