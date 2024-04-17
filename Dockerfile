@@ -19,7 +19,7 @@ RUN export ASPNETCORE_URLS=http://0.0.0.0:5555
 
 ENV PATH="/root/.dotnet:${PATH}"
 
-COPY ./publish ./app
+COPY ./src/publish ./app
 
 WORKDIR /app
 
