@@ -25,7 +25,7 @@ jobs:
       run: echo "${{ github.ref }}"
     - name: Determine Version
       id: version
-      run: echo "::set-output name=version::$(basename ${{ github.ref }})"
+      run: echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
 
     - name: Build Docker Image  # Builds the Docker image using Docker Buildx
       run: |
