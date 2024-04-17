@@ -24,7 +24,7 @@ jobs:
 
     - name: Determine Version
       id: version
-      run: echo "::set-output name=version::$(echo ${GITHUB_REF} | cut -d'/' -f3)"
+      run: echo "::set-output name=version::$(basename ${{ github.ref }})"
 
     - name: Build Docker Image  # Builds the Docker image using Docker Buildx
       run: |
