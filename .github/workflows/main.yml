@@ -27,7 +27,7 @@ jobs:
       run: echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
 
     - name: Restore NuGet Packages
-      run: dotnet restore
+      run: dotnet restore src/
 
     - name: Build and Publish
       run: dotnet publish -c Release -o ./src/publish
