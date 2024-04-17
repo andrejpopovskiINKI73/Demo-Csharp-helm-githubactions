@@ -28,4 +28,4 @@ jobs:
 
     - name: Push Docker Image  # Pushes the built Docker image to Docker Hub
       run: |
-        docker push andrejpopovski123/todoapitest:latest  # Push the Docker im
+        docker push docker.io/andrejpopovski123/todoapitest:latest  # Push the Docker im
