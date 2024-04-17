@@ -1,5 +1,5 @@
-*/bin/
-*/obj/
-*/publish/
+src/bin/
+src/obj/
+src/publish/
 *.nuget.*
 *.dotnet
