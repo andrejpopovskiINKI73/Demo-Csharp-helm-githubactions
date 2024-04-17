@@ -15,6 +15,8 @@ RUN apk add --no-cache \
     libstdc++ \
     zlib
 
+RUN export ASPNETCORE_URLS=http://0.0.0.0:5555
+
 ENV PATH="/root/.dotnet:${PATH}"
 
 COPY ./src/publish ./app
