@@ -1,0 +1,10 @@
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\TodoApi.exe
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\TodoApi.dll
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\TodoApi.deps.json
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\TodoApi.runtimeconfig.json
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\TodoApi.pdb
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\Microsoft.EntityFrameworkCore.dll
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\andre\OneDrive\Десктоп\RLDatixTask\dotnet-todo-main\src\publish\Microsoft.EntityFrameworkCore.Relational.dll
