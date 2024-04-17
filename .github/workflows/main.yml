@@ -23,7 +23,8 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}  # Uses Docker Hub username from repository secrets
         password: ${{ secrets.DOCKER_PASSWORD }}  # Uses Docker Hub password from repository secrets
-
+    - name: Echo GitHub Ref
+      run: echo "${{ github.ref }}"
     - name: Determine Version
       id: version
       run: echo "::set-output name=version::$(basename ${{ github.ref }})"
