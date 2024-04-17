@@ -2,8 +2,6 @@ name: Build Docker Image  # Name of the workflow
 
 on:
   push:
-    branches:
-      - master
     tags:
       - 'v*'
 
