@@ -22,10 +22,14 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}  # Uses Docker Hub username from repository secrets
         password: ${{ secrets.DOCKER_PASSWORD }}  # Uses Docker Hub password from repository secrets
 
+    - name: Determine Version
+      id: version
+      run: echo "::set-output name=version::$(basename ${GITHUB_REF})"
+
     - name: Build Docker Image  # Builds the Docker image using Docker Buildx
       run: |
-        docker buildx build --tag andrejpopovski123/todoapitest:latest --file Dockerfile --load ./
+        docker buildx build --tag andrejpopovski123/todoapitest::${{ steps.version.outputs.version }} --file Dockerfile --load ./
 
     - name: Push Docker Image  # Pushes the built Docker image to Docker Hub
       run: |
-        docker push andrejpopovski123/todoapitest:latest  # Push the Docker im
+        docker push andrejpopovski123/todoapitest::${{ steps.version.outputs.version }}  # Push the Docker im
