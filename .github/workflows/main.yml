@@ -24,7 +24,7 @@ jobs:
 
     - name: Build Docker Image  # Builds the Docker image using Docker Buildx
       run: |
-        docker buildx build --tag andrejpopovski123/todoapitest:latest --file Dockerfile .
+        docker buildx build --tag andrejpopovski123/todoapitest:latest --file Dockerfile ./src/
 
     - name: Push Docker Image  # Pushes the built Docker image to Docker Hub
       run: |
