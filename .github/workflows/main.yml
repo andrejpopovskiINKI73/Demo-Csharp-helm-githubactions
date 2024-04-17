@@ -1,0 +1,31 @@
+name: Build Docker Image  # Name of the workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Specifies the operating system for the job
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub  # Logs in to Docker Hub to push the Docker image
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}  # Uses Docker Hub username from repository secrets
+        password: ${{ secrets.DOCKER_PASSWORD }}  # Uses Docker Hub password from repository secrets
+
+    - name: Build Docker Image  # Builds the Docker image using Docker Buildx
+      run: |
+        docker buildx build --tag andrejpopovski123/todoapitest:latest --file Dockerfile ./src/
+
+    - name: Push Docker Image  # Pushes the built Docker image to Docker Hub
+      run: |
+        docker push andrejpopovski123/todoapitest:latest  # Push the Docker im
