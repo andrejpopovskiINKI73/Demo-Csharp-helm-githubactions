@@ -1,0 +1,10 @@
+deployment:
+  replicas: 2
+  image:
+    repo: andrejpopovski123/todoapitest
+    tag: v1.0.21
+  containerPort: 5555
+
+service:
+  type: NodePort
+  port: 5555

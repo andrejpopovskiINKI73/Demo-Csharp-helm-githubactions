@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapi-deploy
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: todo-api
+  template:
+    metadata:
+      labels:
+        app: todo-api
+    spec:
+      containers:
+      - name: todoapi-deploy
+        image: {{ .Values.deployment.image.repo }}:{{ .Values.deployment.image.tag }}
+        ports:
+        - containerPort: {{ .Values.deployment.containerPort }}

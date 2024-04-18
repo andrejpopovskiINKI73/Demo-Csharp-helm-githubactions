@@ -4,3 +4,11 @@
 *.nuget.*
 *.dotnet
 /src/.scannerwork
+
+*.helm
+charts/
+charts.lock
+Chart.lock
+requirements.lock
+*.prov
+*.tgz

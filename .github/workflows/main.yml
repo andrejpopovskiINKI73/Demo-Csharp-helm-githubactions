@@ -3,7 +3,7 @@ name: Build Docker Image
 on:
   push:
     tags:
-      - 'v*'  # Trigger only on tags starting with 'v'
+      - 'v*'
 
 jobs:
   build:
