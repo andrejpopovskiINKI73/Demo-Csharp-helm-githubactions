@@ -33,7 +33,7 @@ jobs:
       run: dotnet publish src/ -c Release -o ./src/publish
 
     - name: SonarQube Analysis
-      uses: SonarSource/sonarcloud-github-action@v1
+      uses: SonarSource/sonarcloud-github-action@v2
       with:
         project: "todoapi"
         token: sqa_d2d105f488e23f5b46e8aed1d98e5646a98297e6
