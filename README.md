@@ -71,3 +71,22 @@ You can verify that the application is running by sending a GET request to http:
   }
 ```
 
+## Deploying the Helm Chart
+
+1. Set up a minikube cluster locally
+2. Make sure the cluster is up and running
+3. Install helm
+4. Go to the root directory of the code repository and run helm package to make a .tgz file that will be used to deploy the kubernetes resources
+```bash
+helm package todoapi-helmchart
+```
+5. Run helm install on the previuosly generated file to push the resources to the k8s cluster (in this case minikube)
+```bash
+helm install todoapi-test .\todoapi-helmchart-0.1.0.tgz
+```
+6. To get the service IP and port run the following:
+```bash
+minikube service todoapi-svc --url
+```
+this should return the node IP and the port which we can use to send the http requests to the backend app that is running on the cluster
+7. By using the url (ex. http://172.19.x.x:32380/todoitems) we can communicate with the pods that are running the image and can send requests to the app.
