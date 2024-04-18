@@ -36,7 +36,7 @@ jobs:
       uses: SonarSource/sonarcloud-github-action@v2
       with:
         project: "todoapi"
-        token: sqa_d2d105f488e23f5b46e8aed1d98e5646a98297e6
+        token: ${{ secrets.SONAR_TOKEN }}
         url: "http://localhost:9000"
 
     - name: Build Docker Image
