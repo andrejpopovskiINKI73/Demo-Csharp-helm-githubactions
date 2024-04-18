@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     steps:
     - name: Checkout Repository
@@ -36,10 +34,8 @@ jobs:
 
     - name: SonarQube Analysis
       uses: SonarSource/sonarcloud-github-action@v2
-      with:
-        project: "todoapi"
-        token: ${{ secrets.SONAR_TOKEN }}
-        url: "http://localhost:9000"
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - name: Build Docker Image
       run: |
