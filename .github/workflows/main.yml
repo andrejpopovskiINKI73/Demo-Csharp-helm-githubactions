@@ -63,22 +63,21 @@ jobs:
       run: |
         sleep 60
     - name: Get Service IP and port number
-      env:
-        SERVICE_URL: ${{ steps.get_service_info.outputs.service_url }}
+      id: get_service_info
       run: |
         export SERVICE_URL=$(minikube service todoapi-svc --url)
-        echo "Service URL is $SERVICE_URL"
+        echo "::set-output name=service_url::$SERVICE_URL"
     - name: Install curl
       run: |
         sudo apt update
-        sudo apt install curl
+        sudo apt install curl -y
     - name: Test endpoint
       run: |
           curl -X POST \
-               -H "Content-Type: application/json" \
-               -d '{"name": "walk dog", "isComplete": false}' \
-               $SERVICE_URL/todoitems
+            -H "Content-Type: application/json" \
+            -d '{"name": "walk dog", "isComplete": false}' \
+            "${{ steps.get_service_info.outputs.service_url }}/todoitems"
     - name: Test endpoint 2
       run: |
-        curl $SERVICE_URL/todoitems
+        curl ${{ steps.get_service_info.outputs.service_url }}/todoitems
 
