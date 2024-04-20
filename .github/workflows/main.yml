@@ -4,80 +4,83 @@ on:
   push:
     tags:
       - 'v*'
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+# Preparing everyting
     - name: Checkout Repository
       uses: actions/checkout@v2
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
+# Get the version from the updated code
     - name: Determine Version
       id: version
       run: echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
-
     - name: Restore NuGet Packages
       run: dotnet restore src/
-
     - name: Build and Publish
       run: dotnet publish src/ -c Release -o ./src/publish
-
+# Using previously set up SonarCloud as a code analysis tool for analyzing C# code
     - name: SonarQube Analysis
       uses: SonarSource/sonarcloud-github-action@v2
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+# Building and pushing the docker image to dockerhub
     - name: Build Docker Image
       run: |
         docker buildx build --tag andrejpopovski123/todoapitest:${{ steps.version.outputs.version }} --file Dockerfile --load ./
-
     - name: Push Docker Image
       run: |
         docker push andrejpopovski123/todoapitest:${{ steps.version.outputs.version }}
-# STEP 3 of TASK
+# START OF STEP 3
+#Setting up helm, minikube, curl
     - name: Install Helm
       uses: azure/setup-helm@v1
       with:
         version: latest
     - name: Start minikube
       uses: medyagh/setup-minikube@latest
-    - name: Try the cluster!
+    - name: Testing k8s cluster/kubectl command usability/accessability
       run: kubectl get pods -A
+    - name: Install curl
+      run: |
+        sudo apt update
+        sudo apt install curl -y
+# Creating and installing the helm template
     - name: Package Helm Chart
       run: |
         helm package todoapi-helmchart
     - name: Helm Install
       run: |
         helm install todoapi-test todoapi-helmchart-0.1.0.tgz
+# Making sure resources get created before continuing
     - name: Wait for resources to be created
       run: |
-        sleep 60
-    - name: Get Service IP and port number
+        sleep 40
+# Grabbing the Node IP and port number
+    - name: Get Node IP and port number
       id: get_service_info
       run: |
         export SERVICE_URL=$(minikube service todoapi-svc --url)
         echo "::set-output name=service_url::$SERVICE_URL"
-    - name: Install curl
-      run: |
-        sudo apt update
-        sudo apt install curl -y
-    - name: Test endpoint
+#Test the endpoints with some examples. Use SERVICE_URL from previous step to send the requests to the correct endpoint
+    - name: Test endpoint POST 
       run: |
           curl -X POST \
             -H "Content-Type: application/json" \
             -d '{"name": "walk dog", "isComplete": false}' \
-            "${{ steps.get_service_info.outputs.service_url }}/todoitems"
-    - name: Test endpoint 2
+            "${{ steps.get_service_info.outputs.service_url }}/todoitems/1"
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"name": "wash dishes", "isComplete": true}' \
+            "${{ steps.get_service_info.outputs.service_url }}/todoitems/2"
+    - name: Test endpoint GET
       run: |
         curl ${{ steps.get_service_info.outputs.service_url }}/todoitems
-
