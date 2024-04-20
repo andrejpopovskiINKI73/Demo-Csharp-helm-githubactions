@@ -53,4 +53,16 @@ jobs:
       uses: medyagh/setup-minikube@latest
     - name: Try the cluster!
       run: kubectl get pods -A
+    - name: Package Helm Chart
+      run: |
+        helm package todoapi-helmchart
+    - name: Helm Install
+      run: |
+        helm install todoapi-test .\todoapi-helmchart-0.1.0.tgz
+    - name: Wait for resources to be created
+      run: |
+        sleep 60
+    - name: Get Service IP and port number
+      run: |
+        minikube service todoapi-svc --url
 
