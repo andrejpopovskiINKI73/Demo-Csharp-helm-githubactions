@@ -78,10 +78,12 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{"name": "walk dog", "isComplete": false}' \
             "${{ steps.get_service_info.outputs.service_url }}/todoitems"
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -d '{"name": "wash dishes", "isComplete": true}' \
-            "${{ steps.get_service_info.outputs.service_url }}/todoitems"
+    - name: Test endpoint POST 2
+      run: |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d '{"name": "wash dishes", "isComplete": true}' \
+          "${{ steps.get_service_info.outputs.service_url }}/todoitems"
     - name: Test endpoint GET
       run: |
         curl ${{ steps.get_service_info.outputs.service_url }}/todoitems
