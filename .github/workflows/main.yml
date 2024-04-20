@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: ToDo API App
 
 on:
   push:
@@ -44,3 +44,13 @@ jobs:
     - name: Push Docker Image
       run: |
         docker push andrejpopovski123/todoapitest:${{ steps.version.outputs.version }}
+# STEP 3 of TASK
+    - name: Install Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: latest
+    - name: Start minikube
+      uses: medyagh/setup-minikube@latest
+    - name: Try the cluster!
+      run: kubectl get pods -A
+
