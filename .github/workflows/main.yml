@@ -56,9 +56,6 @@ jobs:
     - name: Package Helm Chart
       run: |
         helm package todoapi-helmchart
-    - name: Test to see what is the tgz filename
-      run: |
-        ls -la
     - name: Helm Install
       run: |
         helm install todoapi-test todoapi-helmchart-0.1.0.tgz
@@ -66,6 +63,22 @@ jobs:
       run: |
         sleep 60
     - name: Get Service IP and port number
+      env:
+        SERVICE_URL: ${{ steps.get_service_info.outputs.service_url }}
       run: |
-        minikube service todoapi-svc --url
+        export SERVICE_URL=$(minikube service todoapi-svc --url)
+        echo "Service URL is $SERVICE_URL"
+    - name: Install curl
+      run: |
+        sudo apt update
+        sudo apt install curl
+    - name: Test endpoint
+      run: |
+          curl -X POST \
+               -H "Content-Type: application/json" \
+               -d '{"name": "walk dog", "isComplete": false}' \
+               $SERVICE_URL/todoitems
+    - name: Test endpoint 2
+      run: |
+        curl $SERVICE_URL/todoitems
 
