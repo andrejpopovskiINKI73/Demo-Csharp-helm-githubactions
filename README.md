@@ -101,21 +101,21 @@ Build: This job runs on an Ubuntu environment.
 
 Steps:
 
-Checkout Repository: Clones the repository.
-Set up Docker Buildx: Configures Docker Buildx.
-Login to Docker Hub: Authenticates with Docker Hub using previously set up credentials (You need to set up a GitHub Actions secret DOCKER_USERNAME and DOCKER_PASSWORD with your dockerhub credentials before running the pipeline)
-Determine Version: Extracts the version from the Git tag (that starts with v*).
-Restore NuGet Packages: Restores NuGet packages for the C# project.
-Build and Publish: Builds and publishes the C# project in Release mode.
-SonarQube Analysis: Runs code analysis using SonarCloud.
-Build Docker Image: Builds a Docker image using the project version.
-Push Docker Image: Pushes the Docker image to Docker Hub.
-Install Helm: Installs Helm for Kubernetes.
-Start Minikube: Initializes Minikube from an existing code from Actions marketplace.
-Testing k8s Cluster: Precheck for Kubernetes cluster accessibility.
-Install Curl: Installs Curl for HTTP requests.
-Package Helm Chart: Packages the Helm chart for deployment.
-Helm Install: Installs the previously packaged Helm chart onto the Kubernetes cluster.
-Wait for Resources to be Created: Allows time for Kubernetes resources to be created.
-Get Node IP and Port Number: Retrieves the Node IP and port number for the deployed service.
-Test Endpoints (POST and GET): Sends test requests to the deployed endpoints using Curl.
+- Checkout Repository: Clones the repository.
+- Set up Docker Buildx: Configures Docker Buildx.
+- Login to Docker Hub: Authenticates with Docker Hub using previously set up credentials (You need to set up a GitHub Actions secret DOCKER_USERNAME and DOCKER_PASSWORD with your dockerhub credentials before running the pipeline)
+- Determine Version: Extracts the version from the Git tag (that starts with v*).
+- Restore NuGet Packages: Restores NuGet packages for the C# project.
+- Build and Publish: Builds and publishes the C# project in Release mode.
+- SonarQube Analysis: Runs code analysis using SonarCloud.
+- Build Docker Image: Builds a Docker image using the project version.
+- Push Docker Image: Pushes the Docker image to Docker Hub.
+- Install Helm: Installs Helm for Kubernetes.
+- Start Minikube: Initializes Minikube from an existing code from Actions marketplace.
+- Testing k8s Cluster: Precheck for Kubernetes cluster accessibility.
+- Install Curl: Installs Curl for HTTP requests.
+- Package Helm Chart: Packages the Helm chart for deployment.
+- Helm Install: Installs the previously packaged Helm chart onto the Kubernetes cluster.
+- Wait for Resources to be Created: Allows time for Kubernetes resources to be created.
+- Get Node IP and Port Number: Retrieves the Node IP and port number for the deployed service.
+- Test Endpoints (POST and GET): Sends test requests to the deployed endpoints using Curl.
